@@ -9,7 +9,7 @@ class RenderData extends React.Component {
     render() {
       return (
       <div>
-        <h4>{this.props.value}</h4>
+        <textarea readOnly value={this.props.value} />
       </div>
     )
   }
