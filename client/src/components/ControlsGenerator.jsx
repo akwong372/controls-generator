@@ -5,7 +5,7 @@ class ControlsGenerator extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {}
+    this.state = {};
   }
 
   render() {
@@ -13,8 +13,8 @@ class ControlsGenerator extends React.Component {
       <div>
         <h1>Controls Generator</h1>
       </div>
-    )
+    );
   }
 }
 
-export default ControlsGenerator
+export default ControlsGenerator;
