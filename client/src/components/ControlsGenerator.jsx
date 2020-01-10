@@ -9,7 +9,8 @@ class ControlsGenerator extends React.Component {
 
     this.state = {
       value:'',
-      submitted: false
+      submitValue: '',
+      isSubmit: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,13 +22,16 @@ class ControlsGenerator extends React.Component {
   }
 
   handleSubmit(event) {
-    this.setState({ submitted: true })
-    alert(`A name was submitted: ${this.state.value}`);
+    this.setState({ 
+      isSubmit: true,
+      submitValue: this.state.value
+    });
+    alert(`A name was isSubmit: ${this.state.value}`);
     event.preventDefault();
   }
 
   renderData() {
-    return <RenderData value={this.state.value} />
+    return <RenderData submitValue={this.state.submitValue} />
   }
 
   render() {
@@ -40,7 +44,7 @@ class ControlsGenerator extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.state.submitted && this.renderData()}
+        {this.state.isSubmit && this.renderData()}
       </div>
     );
   }
