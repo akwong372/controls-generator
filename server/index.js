@@ -13,7 +13,9 @@ app.use(
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use('/', (req, res) => res.send('Testing'));
+app.get('/', (req, res) => {
+  res.send('we up!')
+})
 
 const PORT = process.env.PORT || 3000;
 
