@@ -21,6 +21,7 @@ class ControlsGenerator extends React.Component {
   }
 
   handleSubmit(event) {
+    this.setState({ submitted: true })
     alert(`A name was submitted: ${this.state.value}`);
     event.preventDefault();
   }
@@ -33,14 +34,13 @@ class ControlsGenerator extends React.Component {
     return (
       <div>
         <h1>Controls Generator</h1>
-
         <form onSubmit={this.handleSubmit} >
           <label>
             <textarea type="text" placeholder="Paste JSON here!" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.submitted && this.renderData()}
+        {this.state.submitted && this.renderData()}
       </div>
     );
   }
