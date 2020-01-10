@@ -26,7 +26,6 @@ class ControlsGenerator extends React.Component {
       isSubmit: true,
       submitValue: this.state.value
     });
-    alert(`A name was isSubmit: ${this.state.value}`);
     event.preventDefault();
   }
 
