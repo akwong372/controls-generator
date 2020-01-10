@@ -1,10 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
+import RenderData from './RenderData.jsx';
+
 class ControlsGenerator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value:'Paste JSON here!'};
+
+    this.state = {
+      value:'',
+      submitted: false
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +25,10 @@ class ControlsGenerator extends React.Component {
     event.preventDefault();
   }
 
+  renderData() {
+    return <RenderData value={this.state.value} />
+  }
+
   render() {
     return (
       <div>
@@ -26,11 +36,11 @@ class ControlsGenerator extends React.Component {
 
         <form onSubmit={this.handleSubmit} >
           <label>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <textarea type="text" placeholder="Paste JSON here!" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
-        
+        {this.submitted && this.renderData()}
       </div>
     );
   }
