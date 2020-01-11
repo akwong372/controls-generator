@@ -3,13 +3,12 @@ import React from 'react';
 class RenderData extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    }
-
-    render() {
-      return (
+  render() {
+    return (
       <div>
-        <h4>{this.props.value}</h4>
+        <textarea readOnly value={this.props.submitValue} />
       </div>
     )
   }

@@ -9,7 +9,8 @@ class ControlsGenerator extends React.Component {
 
     this.state = {
       value:'',
-      submitted: false
+      submitValue: '',
+      isSubmit: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,26 +22,28 @@ class ControlsGenerator extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(`A name was submitted: ${this.state.value}`);
+    this.setState({ 
+      isSubmit: true,
+      submitValue: this.state.value
+    });
     event.preventDefault();
   }
 
   renderData() {
-    return <RenderData value={this.state.value} />
+    return <RenderData submitValue={this.state.submitValue} />
   }
 
   render() {
     return (
       <div>
         <h1>Controls Generator</h1>
-
         <form onSubmit={this.handleSubmit} >
           <label>
             <textarea type="text" placeholder="Paste JSON here!" onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.submitted && this.renderData()}
+        {this.state.isSubmit && this.renderData()}
       </div>
     );
   }
