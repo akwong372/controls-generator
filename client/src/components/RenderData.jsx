@@ -10,7 +10,7 @@ class RenderData extends React.Component {
       <div>
         <textarea readOnly value={this.props.submitValue} />
       </div>
-    )
+    );
   }
 }
 
