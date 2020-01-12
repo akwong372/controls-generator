@@ -17,6 +17,10 @@ class ControlsGenerator extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.postJSON();
+  }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
@@ -33,10 +37,24 @@ class ControlsGenerator extends React.Component {
     return <RenderData submitValue={this.state.submitValue} />;
   }
 
+  postJSON() {
+    axios
+      .post('/json', {
+        firstName: 'Test',
+        lastName: 'JSON'
+      })
+      .then(res => {
+        console.log(`Response Data: ${res.data}`);
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`);
+      });
+  }
+
   render() {
     return (
       <div>
-        <h1>Controls Generator</h1>
+        <h2>controls generator</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             <textarea
