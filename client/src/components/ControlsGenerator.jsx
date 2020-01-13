@@ -8,7 +8,7 @@ class ControlsGenerator extends React.Component {
     super(props);
 
     this.state = {
-      value:'',
+      value: '',
       submitValue: '',
       isSubmit: false
     };
@@ -17,12 +17,16 @@ class ControlsGenerator extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.postJSON();
+  }
+
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
-    this.setState({ 
+    this.setState({
       isSubmit: true,
       submitValue: this.state.value
     });
@@ -30,18 +34,36 @@ class ControlsGenerator extends React.Component {
   }
 
   renderData() {
-    return <RenderData submitValue={this.state.submitValue} />
+    return <RenderData submitValue={this.state.submitValue} />;
+  }
+
+  postJSON() {
+    axios
+      .post('/json', {
+        firstName: 'Test',
+        lastName: 'JSON'
+      })
+      .then(res => {
+        console.log(`Response Data: ${res.data}`);
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`);
+      });
   }
 
   render() {
     return (
       <div>
-        <h1>Controls Generator</h1>
-        <form onSubmit={this.handleSubmit} >
+        <h2>controls generator</h2>
+        <form onSubmit={this.handleSubmit}>
           <label>
-            <textarea type="text" placeholder="Paste JSON here!" onChange={this.handleChange} />
+            <textarea
+              type='text'
+              placeholder='Paste JSON here!'
+              onChange={this.handleChange}
+            />
           </label>
-          <input type="submit" value="Submit" />
+          <input type='submit' value='Submit' />
         </form>
         {this.state.isSubmit && this.renderData()}
       </div>

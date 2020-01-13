@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -13,9 +14,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/', (req, res) => {
-  res.send('we up!')
-})
+app.use('/', routes);
 
 const PORT = process.env.PORT || 3000;
 
