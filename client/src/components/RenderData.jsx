@@ -8,7 +8,7 @@ class RenderData extends React.Component {
   render() {
     return (
       <div>
-        <textarea readOnly value={this.props.submitValue} />
+        <textarea readOnly rows="10" cols="40" value={this.props.submitValue} />
       </div>
     )
   }
