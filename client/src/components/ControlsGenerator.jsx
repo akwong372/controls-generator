@@ -13,54 +13,53 @@ class ControlsGenerator extends React.Component {
       isSubmit: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.postJSON();
+  componentDidMount() {}
+
+  onChange(e) {
+    this.setState({ value: e.target.value });
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
+  onSubmit(e) {
     this.setState({
       isSubmit: true,
       submitValue: this.state.value
     });
-    event.preventDefault();
+
+    const data = {
+      title: this.state.title,
+      body: this.state.body
+    };
+
+    axios
+      .post('https://jsonplaceholder.typicode.com/posts', data)
+      .then(res => {
+        console.log('Response', res);
+      })
+      .catch(err => {
+        console.log('Error', err);
+      });
+
+    e.preventDefault();
   }
 
   renderData() {
     return <RenderData submitValue={this.state.submitValue} />;
   }
 
-  postJSON() {
-    axios
-      .post('/json', {
-        firstName: 'Test',
-        lastName: 'JSON'
-      })
-      .then(res => {
-        console.log(`Response Data: ${res.data}`);
-      })
-      .catch(err => {
-        console.log(`Error: ${err}`);
-      });
-  }
-
   render() {
     return (
       <div>
         <h2>controls generator</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.onSubmit}>
           <label>
             <textarea
               type='text'
               placeholder='Paste JSON here!'
-              onChange={this.handleChange}
+              onChange={this.onChange}
             />
           </label>
           <input type='submit' value='Submit' />
